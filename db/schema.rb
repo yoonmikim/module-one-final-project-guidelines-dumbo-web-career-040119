@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 3) do
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.string "question_1"
     t.integer "student_id"
     t.integer "house_id"
   end
