@@ -1,6 +1,6 @@
 class CommandLineInterface
   def greet
-    puts 'Welcome to The Sorting House Quizzes, the best resource for Hogwarts info in the wizarding world!🧙'
+    puts '🧙Welcome to The Sorting House Quizzes, the best resource for Hogwarts info in the wizarding world!🧙'
   end
 
   def getName
