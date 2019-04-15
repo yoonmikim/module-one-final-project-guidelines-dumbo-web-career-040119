@@ -145,29 +145,31 @@ class CommandLineInterface
     @@answer_array << answer_10
   end
 
+
   def assignHouse
     puts "The Sorting Hat is thinking..."
     sleep 3
     if @@answer_array.reduce(:+) >= 10 && @@answer_array.reduce(:+) <= 18
-      slytherin = House.create(house_name: "Slytherin")
+      slytherin = House.find_by(house_name: "Slytherin")
       Quiz.create(student_id: @student.id, house_id: slytherin.id)
       puts "Congratulations! You have been placed in Slytherin! 🐍🐍🐍"
     elsif @@answer_array.reduce(:+) >= 19 && @@answer_array.reduce(:+) <= 25
-      hufflepuff = House.create(house_name: "Hufflepuff")
+      hufflepuff = House.find_by(house_name: "Hufflepuff")
       Quiz.create(student_id: @student.id, house_id: hufflepuff.id)
       puts "Congratulations! You have been placed in Hufflepuff! 🦡🦡🦡"
     elsif @@answer_array.reduce(:+) >= 26 && @@answer_array.reduce(:+) <= 32
-      ravenclaw = House.create(house_name: "Ravenclaw")
+      ravenclaw = House.find_by(house_name: "Ravenclaw")
       Quiz.create(student_id: @student.id, house_id: ravenclaw.id)
       puts "Congratulations! You have been placed in Ravenclaw! 🦅🦅🦅"
     elsif @@answer_array.reduce(:+) >= 33 && @@answer_array.reduce(:+) <= 40
-      gryffindor = House.create(house_name: "Gryffindor")
+      gryffindor = House.find_by(house_name: "Gryffindor")
       Quiz.create(student_id: @student.id, house_id: gryffindor.id)
       puts "Congratulations! You have been placed in Gryffindor! 🦁🦁🦁"
     end
   end
 
   def secondMenu
+    # Maybe use until loop?
     prompt = TTY::Prompt.new
     ans = prompt.select('What would you like to do now?') do |menu|
       menu.choice 'I am not happy with my house, I want to redo the quiz!', 1
@@ -182,23 +184,57 @@ class CommandLineInterface
     if ans == 1
       #Start the quiz over.
       startQuizAgain
+
     elsif ans == 2
       #View the different houses a specific student has been placed in.
+
     elsif ans == 3
       #Delete the last quiz.
       Quiz.last.delete
+
     elsif ans == 4
       #View all the students in Slytherin.
-      # Quiz.find_by(house_id:
-      House.find_by(house_name: "Slytherin")
+      quizzes = Quiz.where(house_id: House.find_by(house_name: "Slytherin").id)
+      ids_from_quizzes = quizzes.map do |quiz|
+        quiz.student_id
+      end
+      names = ids_from_quizzes.map do |num|
+        Student.find_by(id: num).name
+      end
+      puts "#{names}"
+
     elsif ans == 5
       #View all the students in Hufflepuff.
+      quizzes = Quiz.where(house_id: House.find_by(house_name: "Hufflepuff").id)
+      ids_from_quizzes = quizzes.map do |quiz|
+        quiz.student_id
+      end
+      names = ids_from_quizzes.map do |num|
+        Student.find_by(id: num).name
+      end
+      puts "#{names}"
 
     elsif ans == 6
       #View all the students in Ravenclaw.
+      quizzes = Quiz.where(house_id: House.find_by(house_name: "Ravenclaw").id)
+      ids_from_quizzes = quizzes.map do |quiz|
+        quiz.student_id
+      end
+      names = ids_from_quizzes.map do |num|
+        Student.find_by(id: num).name
+      end
+      puts "#{names}"
 
     elsif ans == 7
       #View all the students in Gryffindor.
+      quizzes = Quiz.where(house_id: House.find_by(house_name: "Gryffindor").id)
+      ids_from_quizzes = quizzes.map do |quiz|
+        quiz.student_id
+      end
+      names = ids_from_quizzes.map do |num|
+        Student.find_by(id: num).name
+      end
+      puts "#{names}"
 
     elsif ans == 8
       #Exit.
