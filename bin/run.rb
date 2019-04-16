@@ -7,6 +7,7 @@ cli.getName
 cli.checkHouse
 cli.createQuiz
 
+<<<<<<< HEAD
 # puts "What house do you want to be in?"
 # user_house = gets.chomp
 # gryffindor = House.create(house_name: user_house)
@@ -20,3 +21,6 @@ cli.createQuiz
 #   # What could we put here to allow a user to type a response?
 #   Restaurant.find_by(name: restaurant_name)
 # end
+=======
+puts "HELLO WORLD!"
+>>>>>>> c9b2efe0999660615eda709ba8a2b82901d24ebf
